@@ -17,6 +17,8 @@ packages = [{include = "nextpy"}]
 python = "^3.8"
 cloudpickle = "^2.2.1"
 fastapi = "^0.96.0"
+fastapi-mail="*"
+databases = { version = "^0.5.5", extras = ["sqlite"] }
 gunicorn = "^20.1.0"
 httpx = ">=0.24.0,<0.26.0"
 jinja2 = "^3.1.2"
