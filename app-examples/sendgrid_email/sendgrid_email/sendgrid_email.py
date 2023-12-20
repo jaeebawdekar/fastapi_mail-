@@ -159,13 +159,17 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
 from pydantic import EmailStr
+from pydantic import validator
+
 import sqlalchemy
 from databases import Database
 
 # Database Configuration
+print("Connecting to the database...")
 DATABASE_URL = "sqlite:///./test.db"
 database = Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
+print("Database Connected")
 
 emails = sqlalchemy.Table(
     "emails",
@@ -196,10 +200,18 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
 # Set Up the App State
 class EmailFormState(xt.State):
-    sender_email: EmailStr = ""
-    sender_password: str = ""
-    receiver_email: EmailStr = ""
+    sender_email: EmailStr = "test@email.com"
+    sender_password: str = "**********"
+    receiver_email: EmailStr = "test1@email.com"
     message: str = ""
+    @validator("sender_email")
+    def validate_sender_email(cls, v):
+        try:
+            EmailStr.validate(v)
+        except ValueError as e:
+            print(f"Validation error for sender_email: {v}. Error: {str(e)}")
+            raise e
+        return v
 
     async def send_email(self):
         # Replace with your email server details
@@ -212,7 +224,8 @@ class EmailFormState(xt.State):
             MAIL_TLS=True,
             MAIL_SSL=False,
             USE_CREDENTIALS=True,
-            VALIDATE_CERTS=True,
+
+            
         )
 
         # Create a MessageSchema for sending the email

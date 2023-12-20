@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useReducer, useState } from "react"
 import { applyDelta, Event, hydrateClientStorage, useEventLoop, refs } from "/utils/state.js"
 
-export const initialState = {"state": {"is_hydrated": false, "router": {"session": {"client_token": "", "client_ip": "", "session_id": ""}, "headers": {"host": "", "origin": "", "upgrade": "", "connection": "", "pragma": "", "cache_control": "", "user_agent": "", "sec_websocket_version": "", "sec_websocket_key": "", "sec_websocket_extensions": "", "accept_encoding": "", "accept_language": ""}, "page": {"host": "", "path": "", "raw_path": "", "full_path": "", "full_raw_path": "", "params": {}}}}, "state.email_form_state": {"message": "", "receiver_email": "", "sender_email": "", "sender_password": ""}}
+export const initialState = {"state": {"is_hydrated": false, "router": {"session": {"client_token": "", "client_ip": "", "session_id": ""}, "headers": {"host": "", "origin": "", "upgrade": "", "connection": "", "pragma": "", "cache_control": "", "user_agent": "", "sec_websocket_version": "", "sec_websocket_key": "", "sec_websocket_extensions": "", "accept_encoding": "", "accept_language": ""}, "page": {"host": "", "path": "", "raw_path": "", "full_path": "", "full_raw_path": "", "params": {}}}}, "state.email_form_state": {"message": "", "receiver_email": "test1@email.com", "sender_email": "test@email.com", "sender_password": "**********"}}
 
 export const ColorModeContext = createContext(null);
 export const UploadFilesContext = createContext(null);
